@@ -6,7 +6,8 @@
     <div class="product-info">
         <h3 class="product-title">{{product().name}}</h3>
         <div class="product-rating">
-            ★★★★☆ <span style="color: #7f8c8d;">(4.5)</span>!!!!!!!!
+            <app-stars-component [rating]="product().rating"/>
+            <span style="color: #7f8c8d;">({{product().rating}})</span>
         </div>
         <div class="product-price">{{product().price}}$</div>
         <div class="product-meta">{{product().category}}</div>
