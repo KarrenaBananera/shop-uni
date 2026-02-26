@@ -1,0 +1,77 @@
+[
+  {
+    "id": 1,
+    "name": "Смартфон XYZ Pro",
+    "imageUrl": "https://example.com/images/smartphone.jpg",
+    "characteristics": {
+      "экран": "6.7 дюймов, OLED",
+      "процессор": "Snapdragon 8 Gen 2",
+      "память": "256 ГБ",
+      "камера": "108 Мп"
+    },
+    "price": 79999.99,
+    "rating": 4.7,
+    "description": "Флагманский смартфон с отличной камерой и производительностью.",
+    "category": "Электроника"
+  },
+  {
+    "id": 2,
+    "name": "Ноутбук UltraBook 15",
+    "imageUrl": "https://example.com/images/laptop.jpg",
+    "characteristics": {
+      "экран": "15.6 дюймов, IPS",
+      "процессор": "Intel Core i7",
+      "оперативная память": "16 ГБ",
+      "накопитель": "512 ГБ SSD"
+    },
+    "price": 124999.50,
+    "rating": 4.5,
+    "description": "Тонкий и лёгкий ноутбук для работы и учёбы.",
+    "category": "Электроника"
+  },
+  {
+    "id": 3,
+    "name": "Кроссовки Running Air",
+    "imageUrl": "https://example.com/images/sneakers.jpg",
+    "characteristics": {
+      "размер": "42",
+      "материал": "текстиль",
+      "цвет": "синий",
+      "сезон": "лето"
+    },
+    "price": 5499.99,
+    "rating": 4.2,
+    "description": "Удобные кроссовки для бега и повседневной носки.",
+    "category": "Обувь"
+  },
+  {
+    "id": 4,
+    "name": "Книга 'Искусство программирования'",
+    "imageUrl": "https://example.com/images/book.jpg",
+    "characteristics": {
+      "автор": "Дональд Кнут",
+      "том": "1",
+      "издательство": "Вильямс",
+      "язык": "русский"
+    },
+    "price": 3299.00,
+    "rating": 4.9,
+    "description": "Классический труд по алгоритмам и структурам данных.",
+    "category": "Книги"
+  },
+  {
+    "id": 5,
+    "name": "Кофеварка EspressoMatic",
+    "imageUrl": "https://example.com/images/coffeemaker.jpg",
+    "characteristics": {
+      "тип": "рожковая",
+      "мощность": "1450 Вт",
+      "объём резервуара": "1.5 л",
+      "цвет": "серебристый"
+    },
+    "price": 18999.90,
+    "rating": 4.4,
+    "description": "Автоматическая кофеварка для приготовления эспрессо и капучино.",
+    "category": "Бытовая техника"
+  }
+]
