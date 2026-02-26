@@ -1,0 +1,18 @@
+.star {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.star-full {
+  color: #FDC700;
+}
+
+.star-half {
+  color: #FDC700;
+}
+
+.star-empty {
+  color: #D1D5DC;
+}
