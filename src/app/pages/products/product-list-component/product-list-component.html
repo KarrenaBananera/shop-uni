@@ -1,0 +1,5 @@
+ @for (item of products$ | async; track item.id) {
+    <app-card-component
+      [product]="item">
+    </app-card-component>
+}
