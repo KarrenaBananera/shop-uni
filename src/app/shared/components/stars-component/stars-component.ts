@@ -8,12 +8,13 @@ import { Component, input } from '@angular/core';
 })
 export class StarsComponent {
   rating = input<number>();
+  size = input<number>(24);
 
   getStarTypes(rating: number | undefined): string[] {
     const stars : string[] = [];
     if (rating == undefined)
       return stars;
-    
+
     for (let i = 0; i < 5; i++) {
       if (rating >= i + 1) {
         stars.push('full');
