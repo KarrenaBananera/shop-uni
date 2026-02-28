@@ -8,7 +8,7 @@ import { Component, input } from '@angular/core';
 })
 export class StarsComponent {
   rating = input<number>();
-  size = input<number>(24);
+  size = input<number>(20);
 
   getStarTypes(rating: number | undefined): string[] {
     const stars : string[] = [];
