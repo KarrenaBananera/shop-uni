@@ -1,5 +1,5 @@
- @for (item of products(); track item.id) {
-    <app-card-component
-      [product]="item">
-    </app-card-component>
-}
+ <div class="product-grid">
+ @for (item of filteredProducts(); track item.id) {
+    <app-card-component [product]="item"></app-card-component>
+  }
+</div>
