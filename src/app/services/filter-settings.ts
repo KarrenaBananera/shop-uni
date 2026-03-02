@@ -7,6 +7,13 @@ export class FilterSettings {
   ratingFilter = signal<RatingFilter>('all');
   minPrice = signal<number | null>(null);
   maxPrice = signal<number | null>(null);
+
+  clearFilter()
+  {
+    this.ratingFilter.set('all');
+    this.minPrice.set(null);
+    this.maxPrice.set(null);
+  }
 }
 
 export class SortSettings {
