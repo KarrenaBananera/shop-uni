@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, Signal } from '@angular/core';
+import { Component, computed, inject, output, Signal } from '@angular/core';
 import { Product } from '../../../shared/models/product';
 import { ProductService } from '../../../services/product-service';
 import { CardComponent } from '../../../shared/components/card-component/card-component';
@@ -50,4 +50,19 @@ export class ProductListComponent {
     return filtered;
   });
 
+  addToCartEvent = output<Product>();
+  productClickEvent = output<Product>();
+
+  onComponentClick(product: Product) {
+    this.productClickEvent.emit(product);
+  }
+
+  OnAddToCartClick(product: Product) {
+    this.addToCartEvent.emit(product);
+  }
+
+  clearFilter()
+  {
+    this.filterService.filter.clearFilter();
+  }
 }
