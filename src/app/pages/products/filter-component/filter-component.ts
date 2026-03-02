@@ -1,29 +1,55 @@
-import { Component } from '@angular/core';
-import { MatSliderModule } from '@angular/material/slider';
+import { Component, inject } from '@angular/core';
+import { NgxSliderModule, Options } from '@angular-slider/ngx-slider';
+import { FilterSettings, RatingFilter } from '../../../services/filter-settings';
+import { ProductFilterService } from '../../../services/product-filter-service';
 
 @Component({
   selector: 'app-filter-component',
-  imports: [MatSliderModule],
+  imports: [NgxSliderModule], 
   templateUrl: './filter-component.html',
-  styleUrl: './filter-component.css',
+  styleUrls: ['./filter-component.css'] 
 })
 export class FilterComponent {
-  startPrice = 0;
-  endPrice = 500;
-  selectedRating: string = 'all';
-  
-   onStartChange(newValue: number) {
-    this.startPrice = newValue;
+
+  filterSettings = inject(ProductFilterService); 
+
+  sliderOptions: Options = {
+  floor: 0,
+  ceil: 500,
+  step: 10,
+  animate: false,
+  showSelectionBar: true,
+  hidePointerLabels: true,
+  hideLimitLabels: true
+};
+
+  selectRating(value: RatingFilter) {
+    if (value === this.filterSettings.filter.ratingFilter())
+      this.filterSettings.filter.ratingFilter.set('all');
+    else
+      this.filterSettings.filter.ratingFilter.set(value);
   }
 
-  onEndChange(newValue: number) {
-        this.endPrice = newValue;
+   get sliderMaxPrice(): number {
+    return this.filterSettings.filter.maxPrice() ?? 500;
+  }
+  set sliderMaxPrice(value: number) {
+    this.filterSettings.filter.maxPrice.set(value);
   }
 
-  selectRating(value: string) {
-      if (value === this.selectedRating)
-        this.selectedRating = 'all';
-      else
-        this.selectedRating = value;
+  get sliderMinPrice(): number {
+    return this.filterSettings.filter.minPrice() ?? 0;
+  }
+  set sliderMinPrice(value: number) {
+    this.filterSettings.filter.minPrice.set(value);
+  }
+
+  clearFilters()
+  {
+    this.filterSettings.filter.maxPrice.set(null);
+    this.filterSettings.filter.minPrice.set(null);
+    this.filterSettings.filter.ratingFilter.set('all');
+    
+
   }
 }
