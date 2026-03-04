@@ -28,7 +28,7 @@
 }
 
 .product-card:hover .product-title {
-  color: var(--selected-button-color);
+  color: var(--primary-buttons-color);
 }
 
 
