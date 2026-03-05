@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NgxSliderModule, Options } from '@angular-slider/ngx-slider';
-import { FilterSettings, RatingFilter } from '../../../services/filter-settings';
+import { FilterSettings, RatingFilter } from '../../../services/model/filter-settings';
 import { ProductFilterService } from '../../../services/product-filter-service';
 
 @Component({
