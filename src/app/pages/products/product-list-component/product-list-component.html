@@ -1,5 +1,5 @@
  <div class="product-grid">
- @for (item of filteredProducts(); track item.id) {
+ @for (item of filterService.filteredProducts(); track item.id) {
     <app-card-component 
     [product]="item" 
     (productClick)="onComponentClick($event)" 
