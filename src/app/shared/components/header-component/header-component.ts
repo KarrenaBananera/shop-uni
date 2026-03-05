@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { CartService } from '../../../services/cart-service';
 
 @Component({
   selector: 'app-header-component',
@@ -9,7 +10,7 @@ import { RouterLink } from "@angular/router";
 })
 export class HeaderComponent {
   dropDownOn = false;
-
+  cart = inject(CartService);
   onDropDownClick() {
     this.dropDownOn = !this.dropDownOn;
   }
