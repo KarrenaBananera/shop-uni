@@ -6,6 +6,7 @@ import { Product } from '../../../shared/models/product';
 import { ToastrService } from 'ngx-toastr';
 import { ProductFilterService } from '../../../services/product-filter-service';
 import { SortComponent } from "../sort-component/sort-component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-page-component',
@@ -15,6 +16,7 @@ import { SortComponent } from "../sort-component/sort-component";
 })
 export class ProductsPageComponent {
   cart = inject(CartService);
+  router = inject(Router);
   toastr = inject(ToastrService);
   filter = inject(ProductFilterService);
   showFilter = false;
@@ -28,5 +30,10 @@ export class ProductsPageComponent {
   onFilterClick()
   {
     this.showFilter = !this.showFilter;
+  }
+
+  onProductClick(product: Product)
+  {
+    this.router.navigate(['/products', product.id]);
   }
 }

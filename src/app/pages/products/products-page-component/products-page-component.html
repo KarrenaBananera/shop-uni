@@ -20,6 +20,6 @@
         <app-filter-component/>
     </div>
     <div class="products">
-        <app-product-list-component (addToCartEvent)="onAddProductToCart($event)"/>
+        <app-product-list-component (addToCartEvent)="onAddProductToCart($event)" (productClickEvent)="onProductClick($event)"/>
     </div>
 </div>
