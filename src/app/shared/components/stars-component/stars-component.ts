@@ -7,7 +7,7 @@ import { Component, input } from '@angular/core';
   styleUrl: './stars-component.css',
 })
 export class StarsComponent {
-  rating = input<number>();
+  rating = input.required<number>();
   size = input<number>(20);
 
   getStarTypes(rating: number | undefined): string[] {
