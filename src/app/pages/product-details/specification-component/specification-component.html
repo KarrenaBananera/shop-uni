@@ -1,0 +1,20 @@
+<div class="specification">
+
+  <button class="header" (click)="toggle()" type="button">
+    <span>Technical Specifications</span>
+    <span class="arrow">
+      {{ expanded() ? '↓' : '↑' }}
+    </span>
+  </button>
+
+  @if (expanded()) {
+    <div class="specification-list">
+      @for (item of fields() | keyvalue; track item.key) {
+        <div class="specification-item">
+          <div class="item-title">{{ item.key }}</div>
+          <div class="item-description">{{ item.value }}</div>
+        </div>
+      }
+    </div>
+  }
+</div>
