@@ -9,7 +9,6 @@ import { Component, input, signal } from '@angular/core';
 })
 export class SpecificationComponent {
   fields = input.required<Record<string,string>>();
-
   expanded = signal(false);
 
   protected toggle(): void {
