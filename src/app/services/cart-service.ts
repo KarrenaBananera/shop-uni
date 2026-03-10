@@ -1,15 +1,23 @@
 import { Injectable, signal } from '@angular/core';
 import { Product } from '../shared/models/product';
 
+// Класс для элемента корзины с реактивным количеством
+export class ProductEntry {
+  quantity = signal(0);
+  constructor(public product: Product) {}
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   private readonly STORAGE_KEY = 'cart-data';
 
-  private productsMap = new Map<number, { product: Product; quantity: number }>();
+  private productsMap = new Map<number, ProductEntry>();
 
   productsCount = signal(0);
+
+  itemsSignal = signal<ProductEntry[]>([]);
 
   constructor() {
     this.loadFromStorage();
@@ -21,10 +29,13 @@ export class CartService {
 
     try {
       const parsed = JSON.parse(data);
-      
       if (Array.isArray(parsed)) {
         this.productsMap = new Map(
-          parsed.map(item => [item.product.id, { product: item.product, quantity: item.quantity }])
+          parsed.map(item => {
+            const entry = new ProductEntry(item.product);
+            entry.quantity.set(item.quantity);
+            return [item.product.id, entry];
+          })
         );
         this.updateCount();
       }
@@ -32,27 +43,35 @@ export class CartService {
     }
   }
 
-  private saveToStorage(){
-    const data = Array.from(this.productsMap.values());
+  private saveToStorage() {
+    const data = Array.from(this.productsMap.values()).map(entry => ({
+      product: entry.product,
+      quantity: entry.quantity()
+    }));
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));
   }
 
   private updateCount() {
     let total = 0;
-    for (const item of this.productsMap.values()) {
-      total += item.quantity;
+    for (const entry of this.productsMap.values()) {
+      total += entry.quantity();
     }
     this.productsCount.set(total);
-    this.saveToStorage(); 
+
+    this.itemsSignal.set(Array.from(this.productsMap.values()));
+
+    this.saveToStorage();
   }
 
   addProduct(product: Product) {
     const id = product.id;
     const existing = this.productsMap.get(id);
     if (existing) {
-      existing.quantity += 1;
+      existing.quantity.set(existing.quantity() + 1);
     } else {
-      this.productsMap.set(id, { product, quantity: 1 });
+      const entry = new ProductEntry(product);
+      entry.quantity.set(1);
+      this.productsMap.set(id, entry);
     }
     this.updateCount();
   }
@@ -61,9 +80,11 @@ export class CartService {
     const id = product.id;
     const existing = this.productsMap.get(id);
     if (existing) {
-      existing.quantity += count;
+      existing.quantity.set(existing.quantity() + count);
     } else {
-      this.productsMap.set(id, { product, quantity: count });
+      const entry = new ProductEntry(product);
+      entry.quantity.set(count);
+      this.productsMap.set(id, entry);
     }
     this.updateCount();
   }
@@ -72,9 +93,11 @@ export class CartService {
     const id = product.id;
     const existing = this.productsMap.get(id);
     if (existing) {
-      existing.quantity -= 1;
-      if (existing.quantity <= 0) {
+      const newQty = existing.quantity() - 1;
+      if (newQty <= 0) {
         this.productsMap.delete(id);
+      } else {
+        existing.quantity.set(newQty);
       }
       this.updateCount();
     }
@@ -83,9 +106,5 @@ export class CartService {
   clearProduct(product: Product) {
     this.productsMap.delete(product.id);
     this.updateCount();
-  }
-
-  get items(): Array<{ product: Product; quantity: number }> {
-    return Array.from(this.productsMap.values());
   }
 }
