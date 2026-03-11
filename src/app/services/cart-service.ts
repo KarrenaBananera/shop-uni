@@ -1,7 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { Product } from '../shared/models/product';
 
-// Класс для элемента корзины с реактивным количеством
 export class ProductEntry {
   quantity = signal(0);
   constructor(public product: Product) {}
@@ -18,6 +17,26 @@ export class CartService {
   productsCount = signal(0);
 
   itemsSignal = signal<ProductEntry[]>([]);
+  
+  subTotalPrice = computed ( () =>
+  {
+    let sum = 0;
+    for (const product of this.itemsSignal())
+    {
+      sum += product.product.price * product.quantity();
+    }
+    return sum;
+  });
+
+  taxPrice = computed (() => Number((this.subTotalPrice() * 0.08).toFixed(2)) );
+  discountPercent = signal(0);
+  discountPrice = computed( () => this.subTotalPrice()*this.discountPercent());
+
+  totalPrice = computed (()=>Number((
+    this.subTotalPrice()
+  + this.taxPrice() 
+  - this.discountPrice())
+  .toFixed(2)));
 
   constructor() {
     this.loadFromStorage();
