@@ -241,7 +241,7 @@
     color: var(--primary-buttons-color);
 }
 
-@media (min-width: 760px) {
+@media (min-width: 1000px) {
     .product-page {
         padding: 24px 32px;
     }
