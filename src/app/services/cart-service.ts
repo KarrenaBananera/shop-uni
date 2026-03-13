@@ -29,8 +29,10 @@ export class CartService {
   });
 
   taxPrice = computed (() => Number((this.subTotalPrice() * 0.08).toFixed(2)) );
+
   discountPercent = signal(0);
-  discountPrice = computed( () => this.subTotalPrice()*this.discountPercent());
+
+  discountPrice = computed( () => Number((this.subTotalPrice()*this.discountPercent()).toFixed(2)));
 
   totalPrice = computed (()=>Number((
     this.subTotalPrice()
