@@ -211,7 +211,10 @@
     display: inline-flex;
     align-items: center;
     border: 1px solid #E5E7EB;
-    border-radius: 6px;
+    border-radius: 10px;
   }
 
+   :host(.last-item) > * {
+    border-bottom: none;
+  }
 }

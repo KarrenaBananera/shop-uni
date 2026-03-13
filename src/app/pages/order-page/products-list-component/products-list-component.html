@@ -6,7 +6,7 @@
     <div class="cart-header-cell cart-header-total">Total</div>
   </div>
 
-  @for (item of array()(); track item.product.id) {
-    <app-product-entry [productEntry]="item"/>
+  @for (item of array()(); track item.product.id; let last = $last) {
+    <app-product-entry [productEntry]="item"  [class.last-item]="last" />
   }
 </div>
